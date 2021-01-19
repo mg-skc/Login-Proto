@@ -66,10 +66,10 @@ try {
         id: Date.now().toString(),
         name: req.body.name,
         email: req.body.email,
-        password: hashedPassword
-        //add user role to be newuser...something
-
-    })
+        password: hashedPassword,
+        phone: req.body.phone,
+        user_role: 'None'
+         })
     res.redirect('/login')
 } catch{
     res.redirect('/register')
