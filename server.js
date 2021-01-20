@@ -15,12 +15,8 @@ const jwt = require ('jsonwebtoken')
 
 
 const initializePassport = require('./passport-config')
-initializePassport(
-    passport,
-     email => users.find(user => user.email===email),
-     id => users.find(user => user.id===id)
-)
 
+//connect Mongoose - here  : HTML can do a post in the code bypassing the js file (per Jeff K)
 //THIS WILL NEED TO BE CHANGED TO POSTS WITH DATABASE STORAGE FOR PRODUCTION!!!
 const users = []
 
@@ -36,6 +32,14 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 app.use(express.json())
+
+//***add MongoDB connection here!!!! */
+
+initializePassport(
+    passport,
+     email => users.find(user => user.email===email),
+     id => users.find(user => user.id===id)
+)
 
 
 app.get('/', checkAuthenticated, (req, res) => {
