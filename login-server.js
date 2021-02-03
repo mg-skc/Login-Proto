@@ -16,7 +16,7 @@ const jwtSimple = require('jwt-simple')
 const bodyParser = require("body-parser");
 const initializePassport = require('./passport-config')
 const cookieParser = require('cookie-parser')
-const { logIn, welcome, refresh } = require("./handlers")
+//const { logIn, welcome, refresh } = require("./handlers")
 
 //require mongoose-translates Node.js
 const mongoose = require ("mongoose");
@@ -25,12 +25,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('returnOriginal', false);
 
 //call in schema models
-
-
-// var Goods = require ("./models/goodsDatabase.js");
 var User = require ("./models/userDatabase.js");
-// var Location = require ("./models/locationDatabase.js");
-// var Action = require ("./models/actionDatabase.js");
 
 //add path library
 const path = require("path");
@@ -90,18 +85,31 @@ app.use (cookieParser())
 
 
 
-// //end waste not
+
 //******WHERER I AM WITH CODING:   This is where I need to change
 //console.log(document.getElementById('emailLog'))
-loginForm.onsubmit = async(e) => {
+
+// loginForm.onsubmit = async(e) => {
+//     e.preventDefault();
+
+//     let response = await fetch (/)
+// }
+
+//const formData = document.getElementById('loginForm')
+loginForm.onsubmit = async (e) => {
     e.preventDefault();
 
-    let response = await fetch (/)
+    let response = await fetch('/login', {
+      method: 'POST',
+      body: new FormData(loginForm)
+    });
+
+    let result = await response.json();
+
+    alert(result.message);
+  };
 
 
-
-
-}
 const loginEmail = formData.get('emailLog')
 const loginPassword = formData.get('passwordLog')
 //waste not get email lookup
@@ -115,11 +123,11 @@ app.get('/users/:'+loginEmail+`'`), (request, response) => {
 };
 
 
-initializePassport(
-    passport,
-     email => user.find(user => user.email===email),
-     id => user.find(user => user.id===id)
-)
+// initializePassport(
+//     passport,
+//      email => user.find(user => user.email===email),
+//      id => user.find(user => user.id===id)
+// )
 
 
 app.get('/', checkAuthenticated, (req, res) => {
