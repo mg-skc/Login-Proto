@@ -88,25 +88,38 @@ app.use(methodOverride('_method'))
 app.use(express.json())
 app.use (cookieParser())
 
-//waste not get email lookup
-    // SERVER SIDE FIND USER
-// app.get('/users/:email', (request, response) => {
-//     console.log(request.params.email);
-//     User.findOne({email: `${request.params.email}`}).exec((err, user) => {
-//         if (err) return console.error(err);
-//         response.send(user);
-//     })
-// });
+
 
 // //end waste not
 //******WHERER I AM WITH CODING:   This is where I need to change
-// console.log(document.getElementById('emailLog'))
+//console.log(document.getElementById('emailLog'))
+loginForm.onsubmit = async(e) => {
+    e.preventDefault();
 
-// initializePassport(
-//     passport,
-//      email => user.find(user => user.email===email),
-//      id => user.find(user => user.id===id)
-// )
+    let response = await fetch (/)
+
+
+
+
+}
+const loginEmail = formData.get('emailLog')
+const loginPassword = formData.get('passwordLog')
+//waste not get email lookup
+// SERVER SIDE FIND USER
+app.get('/users/:'+loginEmail+`'`), (request, response) => {
+    console.log(request.params.email);
+    User.findOne({email: `${request.params.email}`}).exec((err, user) => {
+        if (err) return console.error(err);
+        response.send(user);
+    })
+};
+
+
+initializePassport(
+    passport,
+     email => user.find(user => user.email===email),
+     id => user.find(user => user.id===id)
+)
 
 
 app.get('/', checkAuthenticated, (req, res) => {
