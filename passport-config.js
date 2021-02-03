@@ -1,6 +1,9 @@
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require ('bcrypt')
 
+
+//timestamp 21.32 ish some before  https://youtu.be/-RCnNyD0L-s?t=1292
+//create get user by email and get user by ID functions and pass results into the section below...
 function initialize(passport, getUserByEmail, getUserById) {
     const authenticateUser = async (email, password, done) => {
         const user = getUserByEmail(email)
@@ -17,6 +20,8 @@ function initialize(passport, getUserByEmail, getUserById) {
             return done(e)
       }
     }
+
+    
 
     passport.use(new LocalStrategy({usernameField: 'email'}, 
     authenticateUser))
